@@ -131,6 +131,8 @@ class UsersController {
    * @param {Response} ctx.response
    */
   async login ({ request, auth, response, session, view }) {
+    const cookies = request.cookies()
+    console.log(cookies)
     return view.render('login')
   }
   
@@ -155,7 +157,17 @@ class UsersController {
   async logout({ auth, response }) {
     await auth.logout()
     return response.redirect('/')
-}
+  }
+
+  async authorize({ auth, response, request }) {
+    response.cookie('cartValue', 210)
+
+    // or
+    response.cookie('cartValue', 210, {
+      httpOnly: true
+    })
+  }
+
 
 }
 
