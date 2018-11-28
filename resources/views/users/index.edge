@@ -1,0 +1,47 @@
+@layout('master')
+
+@section('content')
+
+<a href="/users/create" class="button is-primary is-pulled-right">Create User</a>
+<section>
+    
+    @if(old('notification'))
+        <div class="notification is-success">
+            {{ old('notification') }}
+        </div>
+    @endif
+    @if(users.length)  
+    <table class="table is-bordered is-striped is-narrow is-fullwidth">
+        <thead>
+          <tr>
+            <th>SN</th>
+            <th>Title</th>
+            <th>Action</th> 
+          </tr>
+        </thead>
+        <tbody>
+            @each(user in users)
+            <tr>
+                <td>
+                    {{ ($loop.index + 1) }}
+                </td>
+                <td>
+                    {{ user.username }}
+                </td>
+                <td>
+                    <form action="{{ 'users/' + user.id + '?_method=DELETE' }}" method="POST">
+                        {{ csrfField() }}
+                        <button class="button is-danger" type="submit">Delete</button>
+                    </form>
+                    
+                </td>
+            </tr>
+            @endeach
+        </tbody>
+      </table>
+      @else
+        <div class="alert alert-warning">No users created yet!</div>
+      @endif
+               
+</section>
+@endsection
