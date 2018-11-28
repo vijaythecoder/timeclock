@@ -18,6 +18,5 @@ Factory.blueprint('App/Models/User', (faker) => {
   return {
     username: faker.username(),
     email: faker.email(),
-    max_hours: faker.number()
   }
 })

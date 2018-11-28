@@ -9,7 +9,7 @@ class UserSchema extends Schema {
       table.increments()
       table.string('username', 80).notNullable().unique()
       table.string('email', 254).notNullable().unique()
-      table.integer('max_hours', 80).notNullable()
+      table.integer('max_hours', 80).default(20)
       table.timestamps()
     })
   }
