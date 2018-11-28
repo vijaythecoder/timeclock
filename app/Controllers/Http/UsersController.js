@@ -8,7 +8,7 @@
  * Resourceful controller for interacting with users
  */
 const User = use('App/Models/User')
-class EstimateController {
+class UsersController {
   /**
    * Show a list of all users.
    * GET users
@@ -120,6 +120,43 @@ class EstimateController {
     session.flash({ notification: 'User Deleted!' })
     return response.redirect('/users')
   }
+  
+  
+  /**
+   * Login View.
+   * GET login
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   */
+  async login ({ request, auth, response, session, view }) {
+    return view.render('login')
+  }
+  
+  /**
+   * Authenticate a user.
+   * POST authenticate
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   */
+  async authenticate ({ request, auth, response, session }) {
+    await auth.logout()
+
+    const { email, password } = request.all()
+    await auth.attempt(email, password)   
+
+    session.flash({ notification: 'Successfully logged in' })        
+    return response.redirect('/users')
+  }
+
+  async logout({ auth, response }) {
+    await auth.logout()
+    return response.redirect('/')
 }
 
-module.exports = EstimateController
+}
+
+module.exports = UsersController
