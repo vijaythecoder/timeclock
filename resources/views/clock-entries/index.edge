@@ -1,0 +1,50 @@
+@layout('master')
+
+@section('content')
+
+<a href="/clockEntries/create" class="button is-primary is-pulled-right">Clock In</a>
+<br><br>
+<section>
+    
+    @if(old('notification'))
+        <div class="notification is-success">
+            {{ old('notification') }}
+        </div>
+    @endif
+    @if(clockEntries.length)  
+    <table class="table is-bordered is-striped is-narrow is-fullwidth">
+        <thead>
+          <tr>
+            <th>SN</th>
+            <th>Starts at</th>
+            <th>User id</th>
+            <th>Ends at</th>
+            <th colspan="2">Action</th> 
+          </tr>
+        </thead>
+        <tbody>
+            @each(clockEntry in clockEntries)
+            <tr>
+                <td> {{ ($loop.index + 1) }} </td>
+                <td> {{ clockEntry.starts_at }} </td>
+                <td> {{ clockEntry.user_id }} </td>
+                <td> {{ clockEntry.ends_at }} </td>
+                <td>
+                    <a href="{{ '/clock-entries/' + clockEntry.id + '/edit' }}" class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <form action="{{ '/clock-entries/' + clockEntry.id + '?_method=DELETE' }}" method="POST">
+                        {{ csrfField() }}
+                        <button class="button is-danger" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            @endeach
+        </tbody>
+      </table>
+      @else
+        <div class="alert alert-warning">No clockEntries created yet!</div>
+      @endif
+               
+</section>
+@endsection

@@ -1,0 +1,50 @@
+@layout('master')
+
+@section('content')
+    <div class="box">
+        <div class="is-pulled-right">
+            <a href="{{ route('/users') }}">
+                All Users
+            </a>
+        </div>
+        <h1 class="title">Create New User</h1>
+        <form action="/users" method="post">
+            {{ csrfField() }}
+
+            <div class="field">
+                <label class="label">Username</label>
+                <div class="control has-icons-left">
+                    <input class="input" type="text" name="username" placeholder="Username">
+                    <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left">
+                    <input class="input" type="email" name="email" placeholder="Email" >
+                    <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Max Hours</label>
+                <div class="control has-icons-left">
+                    <input class="input" type="number" name="max_hours" placeholder="Maximum hours" >
+                    <span class="icon is-small is-left">
+                    <i class="fas fa-clock"></i>
+                    </span>
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                <button type="submit" class="button is-success">Create User</button>
+            </div>
+        </form>
+    </div>
+@endsection

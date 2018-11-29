@@ -8,7 +8,7 @@
  * Resourceful controller for interacting with users
  */
 const User = use('App/Models/User')
-class UsersController {
+class UserController {
   /**
    * Show a list of all users.
    * GET users
@@ -167,11 +167,12 @@ class UsersController {
     })
   }
 
-  async clockEntries({ auth, response, params }) {
-    const clockEntries = await User.findBy('username', params.username)
+  async clockEntries({ params, view }) {
+    const user = await User.findOrFail(params.id)
+    const clockEntries = await user.clockEntries().fetch()
     return view.render('users.clock-entries', { clockEntries: clockEntries.toJSON() })
   }
 
 }
 
-module.exports = UsersController
+module.exports = UserController

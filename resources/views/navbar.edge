@@ -12,13 +12,17 @@
   </div>
     
   <div id="navbarBasicExample" class="navbar-menu">
-   
+    <div class="navbar-start">
+      <a href="/users" class="navbar-item">
+        Users
+      </a>
+    </div>
 
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
           @if(auth.user.id)
-            
+            <a class="button is-light" href="/logout">Logged Users <span class="sr-only">(current)</span></a>
             <a class="button is-light" href="/logout">Logout <span class="sr-only">(current)</span></a>
           @else
           <a href="/login" class="button is-light">
