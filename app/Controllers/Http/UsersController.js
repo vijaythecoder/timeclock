@@ -167,9 +167,9 @@ class UsersController {
     })
   }
 
-  async clockEntries({ auth, response }) {
-    // const clockEntries = await User.all()
-    // return view.render('users.index', { users: users.toJSON() })
+  async clockEntries({ auth, response, params }) {
+    const clockEntries = await User.findBy('username', params.username)
+    return view.render('users.clock-entries', { clockEntries: clockEntries.toJSON() })
   }
 
 }

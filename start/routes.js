@@ -18,8 +18,9 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 
+
+Route.get('/users/:username/clock-entries', 'UsersController.clockEntries')
 Route.resource('/users', 'UsersController').middleware('auth')
-Route.get('/users/:username/clock-entries', 'UsersController.clockEntries').middleware('auth')
 Route.get('/login', 'UsersController.login').middleware('guest')
 Route.post('/login', 'UsersController.authenticate')
 Route.get('/logout','UsersController.logout')
