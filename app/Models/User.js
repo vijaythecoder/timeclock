@@ -36,7 +36,7 @@ class User extends Model {
   }
   
   clockEntries () {
-    return this.hasMany('App/Models/')
+    return this.hasMany('App/Models/ClockEntry')
   }
 
 }

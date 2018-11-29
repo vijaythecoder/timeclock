@@ -15,7 +15,19 @@ const Factory = use('Factory')
 
 class UserSeeder {
 async run () {
-    const user = await Factory.model('App/Models/User').createMany(20)
+    const user = await Factory.model('App/Models/User').createMany(10)
+
+    const User = use('App/Models/User')
+    for(var i = 1; i < 11; i++)
+    {
+      const user = await User.find(i)
+      for(var j = 1; j < 6; j++)
+      {
+        const clockEntry = await Factory.model('App/Models/ClockEntry').make(5)
+        await user.clockEntries().save(clockEntry)
+      }
+    }
+
   }
 }
 module.exports = UserSeeder

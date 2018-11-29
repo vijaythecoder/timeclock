@@ -22,3 +22,10 @@ Factory.blueprint('App/Models/User', (faker) => {
     email: faker.email()
   }
 })
+
+Factory.blueprint('App/Models/ClockEntry', async (faker) => {
+    return {
+        starts_at: faker.date(),
+        ends_at: faker.date()
+    }
+})
