@@ -20,7 +20,6 @@ class UsersController {
    */
   async index ({ request, response, view }) {
     const users = await User.all()
-    console.log(users)
     return view.render('users.index', { users: users.toJSON() })
   }
 
@@ -168,6 +167,10 @@ class UsersController {
     })
   }
 
+  async clockEntries({ auth, response }) {
+    // const clockEntries = await User.all()
+    // return view.render('users.index', { users: users.toJSON() })
+  }
 
 }
 

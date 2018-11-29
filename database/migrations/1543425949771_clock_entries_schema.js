@@ -9,6 +9,7 @@ class ClockEntriesSchema extends Schema {
       table.increments()
       table.dateTime('starts_at')
       table.dateTime('ends_at')
+      table.integer('user_id').unsigned().references('id').inTable('users')
       table.timestamps()
     })
   }
@@ -17,5 +18,4 @@ class ClockEntriesSchema extends Schema {
     this.drop('clock_entries')
   }
 }
-
 module.exports = ClockEntriesSchema
